@@ -28,23 +28,18 @@ public class InputExercise {
     private JButton cancelButton;
     private JButton saveButton;
     JPanel panelMain;
-    JPanel panelMainAddNew;
     private JComboBox<String> JComboBoxExercise;
 
     public InputExercise() {
         saveButton.addActionListener(e -> {
-            System.out.println("Exercise:   " + JComboBoxExercise.getSelectedItem());
-            System.out.println("Date:       " + textFieldDate.getText());
-            System.out.println("Sets:       " + textFieldSets.getText());
-            System.out.println("Reps:       " + textFieldReps.getText());
-            System.out.println("Weight:     " + textFieldWeight.getText());
-            Exercise test = new Exercise("test", 3, 10, 50);
-            System.out.println(test.getName());
+            System.out.println("Exercise:     " + JComboBoxExercise.getSelectedItem());
+            System.out.println("Date:         " + textFieldDate.getText());
+            System.out.println("Sets:         " + textFieldSets.getText());
+            System.out.println("Reps:         " + textFieldReps.getText());
+            System.out.println("Weight:       " + textFieldWeight.getText());
         });
 
-
         JComboBoxExercise.addActionListener(e -> {
-            System.out.println(JComboBoxExercise.getSelectedItem());
             int idx = JComboBoxExercise.getSelectedIndex() + 1;
             int enumLength = EnumExercises.values().length;
             if (idx == enumLength) {
@@ -53,39 +48,38 @@ public class InputExercise {
                 frame2.setContentPane(AddNewExercise.panelMainAddNew);
                 frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame2.pack();
+                frame2.setLocationRelativeTo(null);
                 frame2.setVisible(true);
             }
-
         });
 
         cancelButton.addActionListener(e -> {
             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(cancelButton);
             frame.dispose();
         });
+
     }
 
 
-
     public static void main(String[] args) {
-        InputExercise inputExercise = new InputExercise();
-        JFrame frame = new JFrame("Input Exercise");
-        frame.setContentPane(inputExercise.panelMain);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
 
 
-
-        //fill default values
-        inputExercise.textFieldDate.setText(getDate());
-        inputExercise.textFieldSets.setText("3");
-        inputExercise.textFieldReps.setText("10");
-
-        for (EnumExercises exe : EnumExercises.values()){
-            inputExercise.JComboBoxExercise.addItem(exe.getStringValue());
-        }
-
-
+//        InputExercise inputExercise = new InputExercise();
+//        JFrame frame = new JFrame("Input Exercise");
+//        frame.setContentPane(inputExercise.panelMain);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.pack();
+//        frame.setLocationRelativeTo(null);
+//        frame.setVisible(true);
+//
+//        //fill default values
+//        inputExercise.textFieldDate.setText(getDate());
+//        inputExercise.textFieldSets.setText("3");
+//        inputExercise.textFieldReps.setText("10");
+//
+//        for (EnumExercises exe : EnumExercises.values()){
+//            inputExercise.JComboBoxExercise.addItem(exe.getStringValue());
+//        }
     }
 
 

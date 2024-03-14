@@ -11,23 +11,41 @@ public class AddNewExercise {
     public AddNewExercise(){
 
         addWorkoutButton.addActionListener(e -> {
-            System.out.println("Category:     " + textFieldCategory.getText());
-            System.out.println("Workout:      " + textFieldWorkout.getText());
-            System.out.println("Default sets: " + textFieldDefaultSets.getText());
-            System.out.println("Default reps: " + textFieldDefaultReps.getText());
-            closeFrame();
+            var workouts = WorkoutDBQuery.findAll();
+            boolean workoutExists = false;
+
+            for (var workout:  workouts) {
+                if (workout.getName().equals(textFieldWorkout.getText())) {
+                    workoutExists = true;
+                    System.out.println("exercise exists");
+                    break;
+                }
+            }
+
+            if (!workoutExists) {
+                int id = WorkoutDBInsert.add(
+                        new Workout(
+                                textFieldCategory.getText(),
+                                textFieldWorkout.getText(),
+                                Integer.parseInt(textFieldDefaultSets.getText()),
+                                Integer.parseInt(textFieldDefaultReps.getText())));
+
+                closeFrame();
+
+
+            }
+
+
         });
 
-        cancelButton.addActionListener(e -> {
-            closeFrame();
-        });
+        cancelButton.addActionListener(e -> closeFrame());
 
     }
 
     public void closeFrame(){
 
-            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(cancelButton);
-            frame.dispose();
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(cancelButton);
+        frame.dispose();
 
     }
 

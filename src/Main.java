@@ -2,16 +2,33 @@ import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args){
-        var sql = "CREATE TABLE products (" +
-                "    id SERIAL PRIMARY KEY," +
-                "    name VARCHAR(255) NOT NULL," +
-                "    price DECIMAL(10, 2) NOT NULL" +
-                ");";
-        try (var conn =  DB.connect();
-             var stmt = conn.createStatement()) {
-            stmt.executeUpdate(sql);
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
+
+
+        var workouts = WorkoutDBQuery.findAll();
+        for (var workout:  workouts) {
+            System.out.println(workout.getName());
         }
+
+        //int id = ProductDB.add(new Product("Phone Case", 19.99));
+        //Product product = new Product("Phone Case", 19.99);
+        //System.out.println(product.toString());
+
+        //Workout workout = new Workout("Chest", "Bench Press");
+        //System.out.println(workout.toString());
+
+        //int id = WorkoutDB.add(new Workout("Chest", "Bench Press"));
+        //System.out.println("Inserted id:" + id);
+
+//        var sql = "CREATE TABLE workouts (" +
+//                "    id SERIAL PRIMARY KEY," +
+//                "    category VARCHAR(255) NOT NULL," +
+//                "    name VARCHAR(255) NOT NULL" +
+//                ");";
+//        try (var conn =  DB.connect();
+//             var stmt = conn.createStatement()) {
+//            stmt.executeUpdate(sql);
+//        } catch (SQLException e) {
+//            System.err.println(e.getMessage());
+//        }
     }
 }

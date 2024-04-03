@@ -54,23 +54,7 @@ public class WorkoutGUI {
 
 
     public static void main(String[] args) {
-//
-//
-//        AddNewWorkout addNewWorkout = new AddNewWorkout();
-//        JFrame frame = new JFrame("Input Exercise");
-//        frame.setContentPane(addNewWorkout.panelMain);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.pack();
-//        frame.setLocationRelativeTo(null);
-//        frame.setVisible(true);
-//
-//        //fill default values
-//        addNewWorkout.textFieldDate.setText(getDate());
-//        addNewWorkout.textFieldSets.setText("3");
-//        addNewWorkout.textFieldReps.setText("10");
-//
-//        updateExerciseList(addNewWorkout);
-//
+
     }
 
 

@@ -1,17 +1,25 @@
-import java.sql.SQLException;
+import javax.swing.*;
 
 public class Main {
     public static void main(String[] args){
 
 
-        var workouts = WorkoutDBQuery.findAll();
-        for (var workout:  workouts) {
-            System.out.println(workout.getName());
-        }
+        WorkoutGUI addNewWorkout = new WorkoutGUI();
+        JFrame frame = new JFrame("Input Exercise");
+        frame.setContentPane(addNewWorkout.panelMain);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
 
-        //int id = ProductDB.add(new Product("Phone Case", 19.99));
-        //Product product = new Product("Phone Case", 19.99);
-        //System.out.println(product.toString());
+
+
+
+//        var workouts = WorkoutDBQuery.findAll();
+//        for (var workout:  workouts) {
+//            System.out.println(workout.getName());
+//        }
+
 
         //Workout workout = new Workout("Chest", "Bench Press");
         //System.out.println(workout.toString());

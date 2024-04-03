@@ -4,19 +4,26 @@ import java.util.Calendar;
 import java.util.List;
 
 
-public class AddNewWorkout {
-    public static List<Workout> tableData = new ArrayList<>();
-    private JTextField textFieldDate;
-    private JTextField textFieldSets;
-    private JTextField textFieldReps;
-    private JTextField textFieldWeight;
-    private JButton cancelButton;
-    private JButton saveButton;
-    JPanel panelMain;
-    private JComboBox<String> JComboBoxExercise;
-    private JButton AddWorkoutButton;
+public class WorkoutGUI {
+    protected List<Workout> tableData = new ArrayList<>();
+    protected JTextField textFieldDate;
+    protected JTextField textFieldSets;
+    protected JTextField textFieldReps;
+    protected JTextField textFieldWeight;
+    protected JButton cancelButton;
+    protected JButton saveButton;
+    protected JPanel panelMain;
+    protected JComboBox<String> JComboBoxExercise;
+    protected JButton AddWorkoutButton;
 
-    public AddNewWorkout() {
+    public WorkoutGUI() {
+        //fill default values
+        this.textFieldDate.setText(WorkoutGUI.getDate());
+        this.textFieldSets.setText("3");
+        this.textFieldReps.setText("10");
+
+        this.updateExerciseList(this); //pull exercises from DB
+
         saveButton.addActionListener(e -> {
             System.out.println("Exercise:     " + JComboBoxExercise.getSelectedItem());
             System.out.println("Date:         " + textFieldDate.getText());
@@ -35,7 +42,7 @@ public class AddNewWorkout {
         });
 
         AddWorkoutButton.addActionListener(e -> {
-                AddNewExercise AddNewExercise = new AddNewExercise();
+                WorkoutEntryGUI AddNewExercise = new WorkoutEntryGUI(this);
                 JFrame frame2 = new JFrame("Input Exercise");
                 frame2.setContentPane(AddNewExercise.panelMainAddNew);
                 frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,23 +54,23 @@ public class AddNewWorkout {
 
 
     public static void main(String[] args) {
-
-
-        AddNewWorkout addNewWorkout = new AddNewWorkout();
-        JFrame frame = new JFrame("Input Exercise");
-        frame.setContentPane(addNewWorkout.panelMain);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-
-        //fill default values
-        addNewWorkout.textFieldDate.setText(getDate());
-        addNewWorkout.textFieldSets.setText("3");
-        addNewWorkout.textFieldReps.setText("10");
-
-        updateExerciseList(addNewWorkout);
-
+//
+//
+//        AddNewWorkout addNewWorkout = new AddNewWorkout();
+//        JFrame frame = new JFrame("Input Exercise");
+//        frame.setContentPane(addNewWorkout.panelMain);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.pack();
+//        frame.setLocationRelativeTo(null);
+//        frame.setVisible(true);
+//
+//        //fill default values
+//        addNewWorkout.textFieldDate.setText(getDate());
+//        addNewWorkout.textFieldSets.setText("3");
+//        addNewWorkout.textFieldReps.setText("10");
+//
+//        updateExerciseList(addNewWorkout);
+//
     }
 
 
@@ -76,8 +83,8 @@ public class AddNewWorkout {
         return dayOfMonth + "-" + (month + 1) + "-" + year;
     }
 
-    public static void updateExerciseList(AddNewWorkout addNewWorkout){
-
+    public static void updateExerciseList(WorkoutGUI addNewWorkout){
+        addNewWorkout.JComboBoxExercise.removeAllItems();
         var workouts = WorkoutDBQuery.findAll();
         for (var workout:  workouts) {
             addNewWorkout.JComboBoxExercise.addItem(workout.getName());

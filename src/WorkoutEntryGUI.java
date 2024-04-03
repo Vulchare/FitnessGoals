@@ -1,14 +1,17 @@
 import javax.swing.*;
+import java.awt.*;
 
-public class AddNewExercise {
-    private JButton addWorkoutButton;
-    private JButton cancelButton;
-    private JTextField textFieldDefaultReps;
-    private JTextField textFieldDefaultSets;
-    private JTextField textFieldWorkout;
-    private JTextField textFieldCategory;
+public class WorkoutEntryGUI {
+    protected JButton addWorkoutButton;
+    protected JButton cancelButton;
+    protected JTextField textFieldDefaultReps;
+    protected JTextField textFieldDefaultSets;
+    protected JTextField textFieldWorkout;
+    protected JTextField textFieldCategory;
     JPanel panelMainAddNew;
-    public AddNewExercise(){
+    private JLabel warningLabelExists;
+
+    public WorkoutEntryGUI(WorkoutGUI workoutGUI){
 
         addWorkoutButton.addActionListener(e -> {
             var workouts = WorkoutDBQuery.findAll();
@@ -18,6 +21,8 @@ public class AddNewExercise {
                 if (workout.getName().equals(textFieldWorkout.getText())) {
                     workoutExists = true;
                     System.out.println("exercise exists");
+                    warningLabelExists.setText("Exercise already exists!");
+                    warningLabelExists.setBackground(Color.RED);
                     break;
                 }
             }
@@ -29,7 +34,7 @@ public class AddNewExercise {
                                 textFieldWorkout.getText(),
                                 Integer.parseInt(textFieldDefaultSets.getText()),
                                 Integer.parseInt(textFieldDefaultReps.getText())));
-
+                workoutGUI.updateExerciseList(workoutGUI);
                 closeFrame();
 
 
